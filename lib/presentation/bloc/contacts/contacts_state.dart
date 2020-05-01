@@ -1,9 +1,8 @@
 import 'package:contacts_flutter/domain/entity/contact.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 
 @immutable
-class ContactsState extends Equatable {
+class ContactsState {
   final bool isLoading;
   final bool isFailure;
   final bool isSuccess;
@@ -71,7 +70,4 @@ class ContactsState extends Equatable {
       contactsLength: ${contacts.length}
     }''';
   }
-
-  @override
-  List<Object> get props => [isLoading, isFailure, isSuccess, contacts];
 }

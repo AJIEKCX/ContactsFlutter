@@ -43,7 +43,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
           _refreshCompleter = Completer();
           return _refreshCompleter.future;
         },
-        child: BlocListener<ContactsBloc, ContactsState>(
+        child: BlocConsumer<ContactsBloc, ContactsState>(
           listener: (context, state) {
             if (state.isSuccess || state.isFailure) {
               _refreshCompleter?.complete();
@@ -55,31 +55,29 @@ class _ContactsScreenState extends State<ContactsScreen> {
               );
             }
           },
-          child: BlocBuilder<ContactsBloc, ContactsState>(
-            builder: (context, state) {
-              if (state.isLoading) {
-                return LoadingIndicator();
-              }
-              if (state.isSuccess) {
-                return Stack(children: [
-                  EmptyStub(
-                    text: S.of(context).empty_contacts,
-                    isVisible: state.contacts.isEmpty,
-                  ),
-                  ContactsList(contacts: state.contacts),
-                ]);
-              }
-              if (state.isFailure) {
-                return ErrorStub(
-                  errorText: S.of(context).error_loading_data_title,
-                  onPressed: () {
-                    _refreshIndicatorKey.currentState.show();
-                  },
-                );
-              }
-              return Container();
-            },
-          ),
+          builder: (context, state) {
+            if (state.isLoading) {
+              return LoadingIndicator();
+            }
+            if (state.isSuccess) {
+              return Stack(children: [
+                EmptyStub(
+                  text: S.of(context).empty_contacts,
+                  isVisible: state.contacts.isEmpty,
+                ),
+                ContactsList(contacts: state.contacts),
+              ]);
+            }
+            if (state.isFailure) {
+              return ErrorStub(
+                errorText: S.of(context).error_loading_data_title,
+                onPressed: () {
+                  _refreshIndicatorKey.currentState.show();
+                },
+              );
+            }
+            return Container();
+          },
         ),
       ),
     );
