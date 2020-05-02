@@ -4,8 +4,13 @@ import 'package:flutter/material.dart';
 class ErrorStub extends StatelessWidget {
   final VoidCallback onPressed;
   final String errorText;
+  final bool isEnabled;
 
-  ErrorStub({@required this.onPressed, @required this.errorText});
+  ErrorStub({
+    @required this.onPressed,
+    @required this.errorText,
+    this.isEnabled = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +20,7 @@ class ErrorStub extends StatelessWidget {
         children: <Widget>[
           Text(errorText),
           RaisedButton(
-            onPressed: onPressed,
+            onPressed: isEnabled ? onPressed : null,
             child: Text(S.of(context).refresh_title.toUpperCase()),
           )
         ],

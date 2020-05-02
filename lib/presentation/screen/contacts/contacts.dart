@@ -44,6 +44,9 @@ class _ContactsScreenState extends State<ContactsScreen> {
           return _refreshCompleter.future;
         },
         child: BlocConsumer<ContactsBloc, ContactsState>(
+          listenWhen: (prev, next) {
+            return !next.isRefreshing && !next.isLoading;
+          },
           listener: (context, state) {
             if (state.isSuccess || state.isFailure) {
               _refreshCompleter?.complete();
@@ -74,6 +77,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
                 onPressed: () {
                   _refreshIndicatorKey.currentState.show();
                 },
+                isEnabled: !state.isRefreshing,
               );
             }
             return Container();

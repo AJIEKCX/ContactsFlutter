@@ -35,11 +35,12 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
   }
 
   Stream<ContactsState> _mapRefreshContactsToState() async* {
+    yield state.copyWith(isRefreshing: true);
     try {
       final contacts = await interactor.fetchContacts();
       yield ContactsState.success(contacts);
     } on Exception catch (_) {
-      yield state.copyWith(isFailure: true);
+      yield state.copyWith(isFailure: true, isRefreshing: false);
     }
   }
 }
