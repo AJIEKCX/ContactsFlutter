@@ -14,7 +14,7 @@ description: Contacts list sample
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -43,9 +43,15 @@ dependencies:
   # Service locator
   get_it: ^3.1.0
 
+  # Database
+  moor: ^2.4.2
+  moor_flutter: ^2.1.1
+
+  # Json
   json_annotation: ^3.0.1
 
 dev_dependencies:
+  moor_generator: ^2.4.0
   build_runner: ^1.9.0
   json_serializable: ^3.3.0
 

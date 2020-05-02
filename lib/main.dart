@@ -11,10 +11,14 @@ import 'presentation/screen/contacts/contacts.dart';
 import 'presentation/screen/details/details.dart';
 
 void main() {
+  _init();
+  runApp(MyApp());
+}
+
+void _init() {
   WidgetsFlutterBinding.ensureInitialized();
   BlocSupervisor.delegate = LoggingBlocDelegate();
   di.init();
-  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

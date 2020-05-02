@@ -1,34 +1,30 @@
-import 'package:contacts_flutter/data/model/contact_model.dart';
+import 'package:contacts_flutter/data/db/database.dart';
 import 'package:contacts_flutter/domain/entity/contact.dart';
 
 class ContactMapper {
-  Contact map(ContactModel model) {
+  Contact mapToDomain(ContactEntity entity) {
     return Contact(
-      id: model.id,
-      name: model.name,
-      phone: model.phone,
-      height: model.height,
-      biography: model.biography,
-      temperament: _mapTemperament(model.temperament),
-      educationPeriod: _mapEducationPeriod(model.educationPeriod),
+      id: entity.id,
+      name: entity.name,
+      phone: entity.phone,
+      height: entity.height,
+      biography: entity.biography,
+      temperament: entity.temperament,
+      educationPeriod:
+      EducationPeriod(start: entity.educationStart, end: entity.educationEnd),
     );
   }
 
-  Temperament _mapTemperament(TemperamentModel model) {
-    switch (model) {
-      case TemperamentModel.sanguine:
-        return Temperament.sanguine;
-      case TemperamentModel.choleric:
-        return Temperament.choleric;
-      case TemperamentModel.phlegmatic:
-        return Temperament.phlegmatic;
-      case TemperamentModel.melancholic:
-        return Temperament.melancholic;
-    }
-    throw ArgumentError('Unexpected TemperamentModel type');
-  }
-
-  EducationPeriod _mapEducationPeriod(EducationPeriodModel model) {
-    return EducationPeriod(start: model.start, end: model.end);
+  ContactEntity mapToEntity(Contact contact) {
+    return ContactEntity(
+        id: contact.id,
+        name: contact.name,
+        phone: contact.phone,
+        height: contact.height,
+        biography: contact.biography,
+        temperament: contact.temperament,
+        educationStart: contact.educationPeriod.start,
+        educationEnd: contact.educationPeriod.end
+    );
   }
 }
