@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:contacts_flutter/data/repository/data_fetch_strategy.dart';
 import 'package:contacts_flutter/domain/interactor/contacts_interactor.dart';
 import 'package:flutter/foundation.dart';
 
@@ -28,7 +29,7 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
   Stream<ContactsState> _mapFetchContactsToState() async* {
     yield ContactsState.loading();
     try {
-      final contacts = await interactor.fetchContacts();
+      final contacts = await interactor.fetchContacts(DataFetchStrategy.cache);
       yield ContactsState.success(contacts);
     } on Exception catch (e) {
       log(e.toString());
@@ -39,7 +40,7 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
   Stream<ContactsState> _mapRefreshContactsToState() async* {
     yield state.copyWith(isRefreshing: true);
     try {
-      final contacts = await interactor.fetchContacts();
+      final contacts = await interactor.fetchContacts(DataFetchStrategy.remote);
       yield ContactsState.success(contacts);
     } on Exception catch (e) {
       log(e.toString());
