@@ -30,6 +30,9 @@ dependencies:
   # Localizations
   intl: ^0.16.1
 
+  # Shared preferences / User defaults
+  shared_preferences: ^0.5.7
+
   # State management
   bloc: ^4.0.0
   flutter_bloc: ^4.0.0

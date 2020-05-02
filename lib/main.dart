@@ -10,15 +10,11 @@ import 'presentation/bloc/contacts/bloc.dart';
 import 'presentation/screen/contacts/contacts.dart';
 import 'presentation/screen/details/details.dart';
 
-void main() {
-  _init();
-  runApp(MyApp());
-}
-
-void _init() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   BlocSupervisor.delegate = LoggingBlocDelegate();
-  di.init();
+  await di.init();
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
