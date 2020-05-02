@@ -1,3 +1,5 @@
+import 'package:contacts_flutter/data/db/database.dart';
+import 'package:contacts_flutter/data/mapper/api_contact_mapper.dart';
 import 'package:contacts_flutter/data/mapper/contact_mapper.dart';
 import 'package:contacts_flutter/data/repository/contacts_repository.dart';
 import 'package:contacts_flutter/data/service/contacts_service.dart';
@@ -19,10 +21,11 @@ void init() {
       () => ContactsInteractor(repository: sl()));
 
   // Repositories
-  sl.registerLazySingleton<ContactsRepository>(
-      () => ContactsRepositoryImpl(service: sl(), mapper: sl()));
+  sl.registerLazySingleton<ContactsRepository>(() =>
+      ContactsRepositoryImpl(sl(), sl(), sl(), sl()));
 
   // Mapper
+  sl.registerLazySingleton<ApiContactMapper>(() => ApiContactMapper());
   sl.registerLazySingleton<ContactMapper>(() => ContactMapper());
 
   // Services
@@ -30,4 +33,7 @@ void init() {
 
   // Http client
   sl.registerLazySingleton<Dio>(() => DioProvider.get());
+
+  // Database
+  sl.registerLazySingleton<AppDatabase>(() => AppDatabase());
 }

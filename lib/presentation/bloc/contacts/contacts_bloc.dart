@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:contacts_flutter/domain/interactor/contacts_interactor.dart';
@@ -29,7 +30,8 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
     try {
       final contacts = await interactor.fetchContacts();
       yield ContactsState.success(contacts);
-    } on Exception catch (_) {
+    } on Exception catch (e) {
+      log(e.toString());
       yield ContactsState.failure();
     }
   }
@@ -39,7 +41,8 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
     try {
       final contacts = await interactor.fetchContacts();
       yield ContactsState.success(contacts);
-    } on Exception catch (_) {
+    } on Exception catch (e) {
+      log(e.toString());
       yield state.copyWith(isFailure: true, isRefreshing: false);
     }
   }
