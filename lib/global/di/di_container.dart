@@ -1,3 +1,4 @@
+import 'package:contacts_flutter/data/mapper/contact_mapper.dart';
 import 'package:contacts_flutter/data/repository/contacts_repository.dart';
 import 'package:contacts_flutter/data/service/contacts_service.dart';
 import 'package:contacts_flutter/domain/interactor/contacts_interactor.dart';
@@ -13,17 +14,20 @@ void init() {
   // Blocs
   sl.registerFactory<ContactsBloc>(() => ContactsBloc(interactor: sl()));
 
-  //Interactors
+  // Interactors
   sl.registerLazySingleton<ContactsInteractor>(
       () => ContactsInteractor(repository: sl()));
 
-  //Repositories
+  // Repositories
   sl.registerLazySingleton<ContactsRepository>(
-      () => ContactsRepositoryImpl(service: sl()));
+      () => ContactsRepositoryImpl(service: sl(), mapper: sl()));
 
-  //Services
+  // Mapper
+  sl.registerLazySingleton<ContactMapper>(() => ContactMapper());
+
+  // Services
   sl.registerLazySingleton<ContactsService>(() => ContactsService(dio: sl()));
 
-  //Http client
+  // Http client
   sl.registerLazySingleton<Dio>(() => DioProvider.get());
 }

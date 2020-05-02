@@ -100,14 +100,54 @@ class ContactsList extends StatelessWidget {
           const Divider(height: 1, thickness: 1),
       itemCount: contacts.length,
       itemBuilder: (context, index) {
-        return ListTile(
-          title: Text(contacts[index].name),
-          subtitle: Text(contacts[index].phone),
-          onTap: () {
+        return ContactTile(
+          name: contacts[index].name,
+          phone: contacts[index].phone,
+          height: contacts[index].height,
+          onPressed: () {
             Navigator.pushNamed(context, Screens.Details);
           },
         );
       },
+    );
+  }
+}
+
+class ContactTile extends StatelessWidget {
+  final String name;
+  final String phone;
+  final double height;
+  final VoidCallback onPressed;
+
+  const ContactTile({
+    @required this.name,
+    @required this.phone,
+    @required this.height,
+    @required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onPressed,
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: Text(name, style: const TextStyle(fontSize: 16)),
+                ),
+                Text(height.toString(), style: const TextStyle(fontSize: 14)),
+              ],
+            ),
+            const SizedBox(height: 4),
+            Text(phone, style: const TextStyle(fontSize: 14)),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -43,7 +43,12 @@ dependencies:
   # Service locator
   get_it: ^3.1.0
 
+  json_annotation: ^3.0.1
+
 dev_dependencies:
+  build_runner: ^1.9.0
+  json_serializable: ^3.3.0
+
   flutter_test:
     sdk: flutter
 

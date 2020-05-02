@@ -1,3 +1,4 @@
+import 'package:contacts_flutter/data/mapper/contact_mapper.dart';
 import 'package:contacts_flutter/data/model/contact_model.dart';
 import 'package:contacts_flutter/data/service/contacts_service.dart';
 import 'package:contacts_flutter/domain/entity/contact.dart';
@@ -6,8 +7,11 @@ import 'package:flutter/cupertino.dart';
 
 class ContactsRepositoryImpl implements ContactsRepository {
   final ContactsService service;
+  final ContactMapper mapper;
 
-  ContactsRepositoryImpl({@required this.service}) : assert(service != null);
+  ContactsRepositoryImpl({@required this.service, @required this.mapper})
+      : assert(service != null),
+        assert(mapper != null);
 
   @override
   Future<List<Contact>> fetchContacts() async {
@@ -18,11 +22,7 @@ class ContactsRepositoryImpl implements ContactsRepository {
     ]);
     return contacts
         .reduce((value, element) => value + element)
-        .map((ContactModel item) => _mapContact(item))
+        .map((ContactModel item) => mapper.map(item))
         .toList();
-  }
-
-  Contact _mapContact(ContactModel model) {
-    return Contact(id: model.id, name: model.name, phone: model.phone);
   }
 }
