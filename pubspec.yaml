@@ -14,7 +14,7 @@ description: Contacts list sample
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.2.0 <3.0.0"
+  sdk: ">=2.6.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -52,6 +52,9 @@ dependencies:
 
   # Json
   json_annotation: ^3.0.1
+
+  # Url
+  url_launcher: ^5.4.5
 
 dev_dependencies:
   moor_generator: ^2.4.0

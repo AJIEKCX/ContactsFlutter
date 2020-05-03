@@ -4,6 +4,7 @@ import 'package:contacts_flutter/domain/entity/contact.dart';
 import 'package:contacts_flutter/generated/l10n.dart';
 import 'package:contacts_flutter/global/screens.dart';
 import 'package:contacts_flutter/presentation/bloc/contacts/bloc.dart';
+import 'package:contacts_flutter/presentation/screen/contact_details/contact_details_arguments.dart';
 import 'package:contacts_flutter/presentation/widget/empty_stub.dart';
 import 'package:contacts_flutter/presentation/widget/error_stub.dart';
 import 'package:contacts_flutter/presentation/widget/loading_indicator.dart';
@@ -105,7 +106,11 @@ class ContactsList extends StatelessWidget {
           phone: contacts[index].phone,
           height: contacts[index].height,
           onPressed: () {
-            Navigator.pushNamed(context, Screens.Details);
+            Navigator.pushNamed(
+              context,
+              Screens.Details,
+              arguments: ContactDetailsArguments(contacts[index]),
+            );
           },
         );
       },
