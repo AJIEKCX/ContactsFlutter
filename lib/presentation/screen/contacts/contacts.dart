@@ -35,7 +35,8 @@ class _ContactsScreenState extends State<ContactsScreen> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: Text(S.of(context).contacts_title),
+        titleSpacing: 0,
+        title: SearchBar(),
       ),
       body: RefreshIndicator(
         key: _refreshIndicatorKey,
@@ -50,7 +51,9 @@ class _ContactsScreenState extends State<ContactsScreen> {
           },
           listener: (context, state) {
             if (state.isSuccess || state.isFailure) {
-              _refreshCompleter?.complete();
+              if (_refreshCompleter?.isCompleted == false) {
+                _refreshCompleter?.complete();
+              }
             }
             if (state.isFailure) {
               _scaffoldKey.currentState.hideCurrentSnackBar();
@@ -89,6 +92,49 @@ class _ContactsScreenState extends State<ContactsScreen> {
   }
 }
 
+class SearchBar extends StatefulWidget {
+  @override
+  _SearchBarState createState() => _SearchBarState();
+}
+
+class _SearchBarState extends State<SearchBar> {
+  ContactsBloc _contactsBloc;
+  final TextEditingController _controller = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _contactsBloc = BlocProvider.of<ContactsBloc>(context);
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(2.0)),
+      color: Colors.white,
+      child: TextField(
+        controller: _controller,
+        textAlignVertical: TextAlignVertical.center,
+        cursorColor: Colors.teal,
+        decoration: InputDecoration(
+          prefixIcon: Icon(Icons.search, color: Colors.grey),
+          suffixIcon: IconButton(
+            icon: Icon(Icons.close, color: Colors.grey),
+            onPressed: () {
+              _controller.clear();
+              _contactsBloc.add(SearchContacts(''));
+            },
+          ),
+          border: InputBorder.none,
+        ),
+        onChanged: (value) {
+          _contactsBloc.add(SearchContacts(value));
+        },
+      ),
+    );
+  }
+}
+
 class ContactsList extends StatelessWidget {
   final List<Contact> contacts;
 
@@ -101,15 +147,16 @@ class ContactsList extends StatelessWidget {
           const Divider(height: 1, thickness: 1),
       itemCount: contacts.length,
       itemBuilder: (context, index) {
+        final contact = contacts[index];
         return ContactTile(
-          name: contacts[index].name,
-          phone: contacts[index].phone,
-          height: contacts[index].height,
+          name: contact.name,
+          phone: contact.phone,
+          height: contact.height,
           onPressed: () {
             Navigator.pushNamed(
               context,
               Screens.Details,
-              arguments: ContactDetailsArguments(contacts[index]),
+              arguments: ContactDetailsArguments(contact),
             );
           },
         );

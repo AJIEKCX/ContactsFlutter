@@ -37,6 +37,9 @@ dependencies:
   bloc: ^4.0.0
   flutter_bloc: ^4.0.0
 
+  # RX
+  rxdart: ^0.24.0
+
   # Comparing objects
   equatable: ^1.0.2
 

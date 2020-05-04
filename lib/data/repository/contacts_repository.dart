@@ -60,8 +60,7 @@ class ContactsRepositoryImpl implements ContactsRepository {
   Future<List<Contact>> _getContactsRemote() async {
     final List<List<ContactModel>> source = await Future.wait([
       service.fetchContacts('01'),
-      service.fetchContacts('02'),
-      service.fetchContacts('03')
+      service.fetchContacts('02')
     ]);
     final contacts = source
         .reduce((value, element) => value + element)

@@ -10,3 +10,12 @@ abstract class ContactsEvent extends Equatable {
 class FetchContacts extends ContactsEvent {}
 
 class RefreshContacts extends ContactsEvent {}
+
+class SearchContacts extends ContactsEvent {
+  final String query;
+
+  SearchContacts(this.query);
+
+  @override
+  List<Object> get props => [query];
+}
