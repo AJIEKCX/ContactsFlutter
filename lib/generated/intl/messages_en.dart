@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "contacts_title" : MessageLookupByLibrary.simpleMessage("Contacts"),
     "empty_contacts" : MessageLookupByLibrary.simpleMessage("Empty contacts"),
     "error_loading_data_title" : MessageLookupByLibrary.simpleMessage("Error loading data"),
-    "refresh_title" : MessageLookupByLibrary.simpleMessage("Refresh")
+    "refresh_title" : MessageLookupByLibrary.simpleMessage("Refresh"),
+    "search_title" : MessageLookupByLibrary.simpleMessage("Search")
   };
 }

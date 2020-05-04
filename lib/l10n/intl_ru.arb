@@ -2,5 +2,6 @@
   "contacts_title": "Контакты",
   "empty_contacts": "Нет контактов",
   "refresh_title": "Обновить",
-  "error_loading_data_title": "Ошибка при загрузке данных"
+  "error_loading_data_title": "Ошибка при загрузке данных",
+  "search_title": "Поиск"
 }

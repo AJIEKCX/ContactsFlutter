@@ -7,8 +7,12 @@ final ThemeData appTheme = ThemeData(
   primaryColorDark: colorPrimaryDark,
   textTheme: TextTheme(
     headline5: TextStyle(fontSize: 20.0, color: colorTextPrimary),
-    bodyText1: TextStyle(fontSize: 16.0, color: colorTextPrimary),
+    bodyText1: TextStyle(
+      fontSize: 16.0,
+      color: colorTextPrimary,
+      fontWeight: FontWeight.normal,
+    ),
     bodyText2: TextStyle(fontSize: 14.0, color: colorTextPrimary),
-    subtitle1: TextStyle(fontSize: 14.0, color: colorTextSecondary)
-  )
+    subtitle1: TextStyle(fontSize: 14.0, color: colorTextSecondary),
+  ),
 );

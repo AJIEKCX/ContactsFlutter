@@ -64,6 +64,15 @@ class S {
       args: [],
     );
   }
+
+  String get search_title {
+    return Intl.message(
+      'Search',
+      name: 'search_title',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

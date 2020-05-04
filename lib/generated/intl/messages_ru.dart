@@ -24,6 +24,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "contacts_title" : MessageLookupByLibrary.simpleMessage("Контакты"),
     "empty_contacts" : MessageLookupByLibrary.simpleMessage("Нет контактов"),
     "error_loading_data_title" : MessageLookupByLibrary.simpleMessage("Ошибка при загрузке данных"),
-    "refresh_title" : MessageLookupByLibrary.simpleMessage("Обновить")
+    "refresh_title" : MessageLookupByLibrary.simpleMessage("Обновить"),
+    "search_title" : MessageLookupByLibrary.simpleMessage("Поиск")
   };
 }
