@@ -48,6 +48,7 @@ class ContactTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return InkWell(
       onTap: onPressed,
       child: Padding(
@@ -58,13 +59,13 @@ class ContactTile extends StatelessWidget {
             Row(
               children: <Widget>[
                 Expanded(
-                  child: Text(name, style: const TextStyle(fontSize: 16)),
+                  child: Text(name, style: textTheme.bodyText1),
                 ),
-                Text(height.toString(), style: const TextStyle(fontSize: 14)),
+                Text(height.toString(), style: textTheme.bodyText2),
               ],
             ),
             const SizedBox(height: 4),
-            Text(phone, style: const TextStyle(fontSize: 14)),
+            Text(phone, style: textTheme.bodyText2),
           ],
         ),
       ),

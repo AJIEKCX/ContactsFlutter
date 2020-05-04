@@ -1,6 +1,7 @@
 import 'package:contacts_flutter/domain/entity/contact.dart';
 import 'package:contacts_flutter/presentation/extension/date_time_format.dart';
 import 'package:contacts_flutter/presentation/screen/contact_details/contact_details_arguments.dart';
+import 'package:contacts_flutter/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -9,6 +10,7 @@ class ContactDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final ContactDetailsArguments args =
         ModalRoute.of(context).settings.arguments;
+    final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(),
       body: Padding(
@@ -18,7 +20,7 @@ class ContactDetailsScreen extends StatelessWidget {
           children: <Widget>[
             Text(
               args.contact.name,
-              style: Theme.of(context).textTheme.headline5,
+              style: textTheme.headline5,
             ),
             const SizedBox(height: 8),
             GestureDetector(
@@ -27,21 +29,21 @@ class ContactDetailsScreen extends StatelessWidget {
               },
               child: Text(
                 args.contact.phone,
-                style: TextStyle(fontSize: 14, color: Colors.lightBlue),
+                style: textTheme.subtitle1.copyWith(color: colorTextLink),
               ),
             ),
             const SizedBox(height: 8),
             Text(
               _getTemperamentTitle(args.contact.temperament),
-              style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+              style: textTheme.subtitle1,
             ),
             const SizedBox(height: 8),
             Text(
               _formatPeriod(args.contact.educationPeriod),
-              style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+              style: textTheme.subtitle1
             ),
             const SizedBox(height: 8),
-            Text(args.contact.biography, style: const TextStyle(fontSize: 14))
+            Text(args.contact.biography, style: textTheme.bodyText2)
           ],
         ),
       ),

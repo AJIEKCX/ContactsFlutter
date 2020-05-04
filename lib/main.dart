@@ -1,5 +1,6 @@
 import 'package:contacts_flutter/global/logging_bloc_delegate.dart';
 import 'package:contacts_flutter/presentation/screen/contact_details/contact_details_screen.dart';
+import 'package:contacts_flutter/presentation/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -29,9 +30,7 @@ class MyApp extends StatelessWidget {
       ],
       supportedLocales: S.delegate.supportedLocales,
       title: 'Contacts',
-      theme: ThemeData(
-        primarySwatch: Colors.teal,
-      ),
+      theme: appTheme,
       initialRoute: Screens.InitialRoute,
       routes: {
         Screens.InitialRoute: (_) => BlocProvider<ContactsBloc>(
