@@ -4,15 +4,18 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:contacts_flutter/data/repository/data_fetch_strategy.dart';
 import 'package:contacts_flutter/domain/interactor/contacts_interactor.dart';
-import 'package:flutter/foundation.dart';
+import 'package:contacts_flutter/global/data_error_handler.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'bloc.dart';
 
 class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
-  ContactsBloc({@required this.interactor}) : assert(interactor != null);
-
   final ContactsInteractor interactor;
+  final DataErrorHandler errorHandler;
+
+  ContactsBloc(this.interactor, this.errorHandler)
+      : assert(interactor != null),
+        assert(errorHandler != null);
 
   @override
   ContactsState get initialState => ContactsState.empty();
@@ -51,7 +54,7 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
       yield ContactsState.success(contacts);
     } on Exception catch (e) {
       log(e.toString());
-      yield ContactsState.failure();
+      yield ContactsState.failure(errorHandler.handle(e));
     }
   }
 
@@ -62,7 +65,11 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
       yield ContactsState.success(contacts);
     } on Exception catch (e) {
       log(e.toString());
-      yield state.copyWith(isFailure: true, isRefreshing: false);
+      yield state.copyWith(
+        isFailure: true,
+        errorText: errorHandler.handle(e),
+        isRefreshing: false,
+      );
     }
   }
 

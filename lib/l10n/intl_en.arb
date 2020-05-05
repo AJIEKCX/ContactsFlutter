@@ -2,6 +2,12 @@
   "contacts_title": "Contacts",
   "empty_contacts": "Empty contacts",
   "refresh_title": "Refresh",
+  "search_title": "Search",
   "error_loading_data_title": "Error loading data",
-  "search_title": "Search"
+  "error_connection": "Check your internet connection",
+  "error_request_canceled": "Request was cancelled",
+  "error_connection_timeout": "Connection timeout",
+  "error_receive_timeout": "Receive timeout in connection with server",
+  "error_send_timeout": "Send timeout in connection with server",
+  "error_response": "Received invalid status code: {code}"
 }

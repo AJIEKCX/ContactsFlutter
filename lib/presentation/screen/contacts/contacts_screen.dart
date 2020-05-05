@@ -53,10 +53,10 @@ class _ContactsScreenState extends State<ContactsScreen> {
                 _refreshCompleter?.complete();
               }
             }
-            if (state.isFailure) {
+            if (state.isFailure && state.errorText.isNotEmpty) {
               _scaffoldKey.currentState.hideCurrentSnackBar();
               _scaffoldKey.currentState.showSnackBar(
-                SnackBar(content: Text(S.of(context).error_loading_data_title)),
+                SnackBar(content: Text(state.errorText)),
               );
             }
           },

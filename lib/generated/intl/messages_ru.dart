@@ -19,11 +19,19 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ru';
 
+  static m0(code) => "Получен неверный статус код: \$code";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "contacts_title" : MessageLookupByLibrary.simpleMessage("Контакты"),
     "empty_contacts" : MessageLookupByLibrary.simpleMessage("Нет контактов"),
+    "error_connection" : MessageLookupByLibrary.simpleMessage("Проверьте ваше интернет соединение"),
+    "error_connection_timeout" : MessageLookupByLibrary.simpleMessage("Таймаут соединения"),
     "error_loading_data_title" : MessageLookupByLibrary.simpleMessage("Ошибка при загрузке данных"),
+    "error_receive_timeout" : MessageLookupByLibrary.simpleMessage("Получен таймаут при соединении с сервером"),
+    "error_request_canceled" : MessageLookupByLibrary.simpleMessage("Запрос был отменен"),
+    "error_response" : m0,
+    "error_send_timeout" : MessageLookupByLibrary.simpleMessage("Отправлен таймаут при соединении с сервером"),
     "refresh_title" : MessageLookupByLibrary.simpleMessage("Обновить"),
     "search_title" : MessageLookupByLibrary.simpleMessage("Поиск")
   };

@@ -56,6 +56,15 @@ class S {
     );
   }
 
+  String get search_title {
+    return Intl.message(
+      'Search',
+      name: 'search_title',
+      desc: '',
+      args: [],
+    );
+  }
+
   String get error_loading_data_title {
     return Intl.message(
       'Error loading data',
@@ -65,12 +74,57 @@ class S {
     );
   }
 
-  String get search_title {
+  String get error_connection {
     return Intl.message(
-      'Search',
-      name: 'search_title',
+      'Check your internet connection',
+      name: 'error_connection',
       desc: '',
       args: [],
+    );
+  }
+
+  String get error_request_canceled {
+    return Intl.message(
+      'Request was cancelled',
+      name: 'error_request_canceled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get error_connection_timeout {
+    return Intl.message(
+      'Connection timeout',
+      name: 'error_connection_timeout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get error_receive_timeout {
+    return Intl.message(
+      'Receive timeout in connection with server',
+      name: 'error_receive_timeout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get error_send_timeout {
+    return Intl.message(
+      'Send timeout in connection with server',
+      name: 'error_send_timeout',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String error_response(dynamic code) {
+    return Intl.message(
+      'Received invalid status code: $code',
+      name: 'error_response',
+      desc: '',
+      args: [code],
     );
   }
 }

@@ -6,15 +6,17 @@ import 'package:flutter/foundation.dart';
 class ContactsState extends Equatable {
   final bool isLoading;
   final bool isRefreshing;
-  final bool isFailure;
   final bool isSuccess;
+  final bool isFailure;
+  final String errorText;
   final List<Contact> contacts;
 
   ContactsState({
     @required this.isLoading,
     @required this.isRefreshing,
-    @required this.isFailure,
     @required this.isSuccess,
+    @required this.isFailure,
+    @required this.errorText,
     @required this.contacts,
   });
 
@@ -22,26 +24,47 @@ class ContactsState extends Equatable {
     return ContactsState(
         isLoading: false,
         isRefreshing: false,
-        isFailure: false,
         isSuccess: false,
+        isFailure: false,
+        errorText: '',
         contacts: const []);
+  }
+
+  ContactsState copyWith({
+    bool isLoading,
+    bool isRefreshing,
+    bool isSuccess,
+    bool isFailure,
+    String errorText,
+    List<Contact> contacts,
+  }) {
+    return ContactsState(
+      isLoading: isLoading ?? this.isLoading,
+      isRefreshing: isRefreshing ?? this.isRefreshing,
+      isSuccess: isSuccess ?? this.isSuccess,
+      isFailure: isFailure ?? this.isFailure,
+      errorText: errorText ?? this.errorText,
+      contacts: contacts ?? this.contacts,
+    );
   }
 
   factory ContactsState.loading() {
     return ContactsState(
         isLoading: true,
         isRefreshing: false,
-        isFailure: false,
         isSuccess: false,
+        isFailure: false,
+        errorText: '',
         contacts: const []);
   }
 
-  factory ContactsState.failure() {
+  factory ContactsState.failure(String errorText) {
     return ContactsState(
         isLoading: false,
         isRefreshing: false,
-        isFailure: true,
         isSuccess: false,
+        isFailure: true,
+        errorText: errorText,
         contacts: const []);
   }
 
@@ -49,25 +72,10 @@ class ContactsState extends Equatable {
     return ContactsState(
         isLoading: false,
         isRefreshing: false,
-        isFailure: false,
         isSuccess: true,
+        isFailure: false,
+        errorText: '',
         contacts: contacts);
-  }
-
-  ContactsState copyWith({
-    bool isLoading,
-    bool isRefreshing,
-    bool isFailure,
-    bool isSuccess,
-    List<Contact> contacts,
-  }) {
-    return ContactsState(
-      isLoading: isLoading ?? this.isLoading,
-      isRefreshing: isRefreshing ?? this.isRefreshing,
-      isFailure: isFailure ?? this.isFailure,
-      isSuccess: isSuccess ?? this.isSuccess,
-      contacts: contacts ?? this.contacts,
-    );
   }
 
   @override
@@ -75,13 +83,14 @@ class ContactsState extends Equatable {
     return '''ContactsState{
       isLoading: $isLoading, 
       isRefreshing: $isRefreshing, 
-      isFailure: $isFailure, 
       isSuccess: $isSuccess, 
+      isFailure: $isFailure, 
+      errorText: $errorText, 
       contactsLength: ${contacts.length}
     }''';
   }
 
   @override
   List<Object> get props =>
-      [isLoading, isRefreshing, isFailure, isSuccess, contacts];
+      [isLoading, isRefreshing, isSuccess, isFailure, errorText, contacts];
 }

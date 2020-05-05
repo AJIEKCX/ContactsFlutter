@@ -2,6 +2,12 @@
   "contacts_title": "Контакты",
   "empty_contacts": "Нет контактов",
   "refresh_title": "Обновить",
+  "search_title": "Поиск",
   "error_loading_data_title": "Ошибка при загрузке данных",
-  "search_title": "Поиск"
+  "error_connection": "Проверьте ваше интернет соединение",
+  "error_request_canceled": "Запрос был отменен",
+  "error_connection_timeout": "Таймаут соединения",
+  "error_receive_timeout": "Получен таймаут при соединении с сервером",
+  "error_send_timeout": "Отправлен таймаут при соединении с сервером",
+  "error_response": "Получен неверный статус код: $code"
 }
