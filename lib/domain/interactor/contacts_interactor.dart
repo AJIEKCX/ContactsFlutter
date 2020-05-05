@@ -2,20 +2,19 @@ import 'package:contacts_flutter/data/repository/data_fetch_strategy.dart';
 import 'package:contacts_flutter/domain/entity/contact.dart';
 import 'package:contacts_flutter/domain/repository/contacts_repository.dart';
 import 'package:contacts_flutter/global/extension/string.dart';
-import 'package:flutter/cupertino.dart';
 
 class ContactsInteractor {
   final RegExp _onlyNumbersRegex = RegExp(r'[^\d]');
-  final ContactsRepository repository;
+  final ContactsRepository _repository;
 
-  ContactsInteractor({@required this.repository}) : assert(repository != null);
+  ContactsInteractor(this._repository) : assert(_repository != null);
 
   Future<List<Contact>> fetchContacts(DataFetchStrategy strategy) async {
-    return repository.fetchContacts(strategy);
+    return _repository.fetchContacts(strategy);
   }
 
   Future<List<Contact>> searchContacts(String query) async {
-    final contacts = await repository.fetchContacts(DataFetchStrategy.local);
+    final contacts = await _repository.fetchContacts(DataFetchStrategy.local);
     return contacts.where((e) => _searchPredicate(e, query)).toList();
   }
 

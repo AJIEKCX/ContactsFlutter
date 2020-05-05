@@ -2,16 +2,15 @@ import 'dart:convert';
 
 import 'package:contacts_flutter/data/model/contact_model.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
 class ContactsService {
-  final Dio dio;
+  final Dio _dio;
 
-  ContactsService({@required this.dio}) : assert(dio != null);
+  ContactsService(this._dio) : assert(_dio != null);
 
   Future<List<ContactModel>> fetchContacts(String sourceNumber) async {
-    final Response response = await dio.get('/generated-$sourceNumber.json');
+    final Response response = await _dio.get('/generated-$sourceNumber.json');
     return compute(_parseContacts, response.data.toString());
   }
 }

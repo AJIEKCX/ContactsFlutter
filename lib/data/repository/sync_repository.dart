@@ -4,17 +4,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 class DefaultSyncRepository extends SyncRepository {
   static const String _contacts = 'contacts';
 
-  final SharedPreferences preferences;
+  final SharedPreferences _preferences;
 
-  DefaultSyncRepository(this.preferences);
+  DefaultSyncRepository(this._preferences);
 
   @override
   Future<void> setContactsSync(int time) {
-    return preferences.setInt(_contacts, time);
+    return _preferences.setInt(_contacts, time);
   }
 
   @override
   int getContactsSync() {
-    return preferences.getInt(_contacts) ?? 0;
+    return _preferences.getInt(_contacts) ?? 0;
   }
 }

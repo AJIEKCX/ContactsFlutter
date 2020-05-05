@@ -21,8 +21,7 @@ Future<void> init() async {
   sl.registerFactory<ContactsBloc>(() => ContactsBloc(sl(), sl()));
 
   // Interactors
-  sl.registerLazySingleton<ContactsInteractor>(
-      () => ContactsInteractor(repository: sl()));
+  sl.registerLazySingleton<ContactsInteractor>(() => ContactsInteractor(sl()));
 
   // Repositories
   sl.registerLazySingleton<ContactsRepository>(
@@ -34,7 +33,7 @@ Future<void> init() async {
   sl.registerLazySingleton<ContactMapper>(() => ContactMapper());
 
   // Services
-  sl.registerLazySingleton<ContactsService>(() => ContactsService(dio: sl()));
+  sl.registerLazySingleton<ContactsService>(() => ContactsService(sl()));
 
   // Http client
   sl.registerLazySingleton<Dio>(() => DioProvider.get());
@@ -44,8 +43,6 @@ Future<void> init() async {
 
   // Other
   final SharedPreferences _preferences = await SharedPreferences.getInstance();
-  sl.registerLazySingleton<SharedPreferences>(
-    () => _preferences,
-  );
+  sl.registerLazySingleton<SharedPreferences>(() => _preferences);
   sl.registerLazySingleton<DataErrorHandler>(() => DataErrorHandler());
 }

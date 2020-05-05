@@ -13,19 +13,19 @@ import 'package:contacts_flutter/domain/repository/sync_repository.dart';
 class ContactsRepositoryImpl implements ContactsRepository {
   static const _cachePeriod = Duration(minutes: 1);
 
-  final ContactsService service;
-  final AppDatabase database;
-  final SyncRepository syncRepository;
-  final ApiContactMapper apiMapper;
-  final ContactMapper mapper;
+  final ContactsService _service;
+  final AppDatabase _database;
+  final SyncRepository _syncRepository;
+  final ApiContactMapper _apiMapper;
+  final ContactMapper _mapper;
 
-  ContactsRepositoryImpl(this.service, this.database, this.syncRepository,
-      this.apiMapper, this.mapper)
-      : assert(service != null),
-        assert(database != null),
-        assert(syncRepository != null),
-        assert(apiMapper != null),
-        assert(mapper != null);
+  ContactsRepositoryImpl(this._service, this._database, this._syncRepository,
+      this._apiMapper, this._mapper)
+      : assert(_service != null),
+        assert(_database != null),
+        assert(_syncRepository != null),
+        assert(_apiMapper != null),
+        assert(_mapper != null);
 
   @override
   Future<List<Contact>> fetchContacts(DataFetchStrategy strategy) async {
@@ -40,7 +40,7 @@ class ContactsRepositoryImpl implements ContactsRepository {
   }
 
   Future<List<Contact>> _getContactsCache() async {
-    final syncTime = syncRepository.getContactsSync();
+    final syncTime = _syncRepository.getContactsSync();
     if (syncTime == 0) {
       return _getContactsRemote();
     }
@@ -59,26 +59,26 @@ class ContactsRepositoryImpl implements ContactsRepository {
 
   Future<List<Contact>> _getContactsRemote() async {
     final List<List<ContactModel>> source = await Future.wait([
-      service.fetchContacts('01'),
-      service.fetchContacts('02')
+      _service.fetchContacts('01'),
+      _service.fetchContacts('02')
     ]);
     final contacts = source
         .reduce((value, element) => value + element)
-        .map((ContactModel item) => apiMapper.map(item))
+        .map((ContactModel item) => _apiMapper.map(item))
         .toList();
     await _saveContacts(contacts);
     return contacts;
   }
 
   Future<List<Contact>> _getContactsLocal() async {
-    final contacts = await database.contactDao.getContacts();
-    return contacts.map<Contact>((e) => mapper.mapToDomain(e)).toList();
+    final contacts = await _database.contactDao.getContacts();
+    return contacts.map<Contact>((e) => _mapper.mapToDomain(e)).toList();
   }
 
   Future<void> _saveContacts(List<Contact> list) {
-    syncRepository.setContactsSync(DateTime.now().millisecondsSinceEpoch);
+    _syncRepository.setContactsSync(DateTime.now().millisecondsSinceEpoch);
     final entities =
-        list.map<ContactEntity>((e) => mapper.mapToEntity(e)).toList();
-    return database.contactDao.insertContacts(entities);
+        list.map<ContactEntity>((e) => _mapper.mapToEntity(e)).toList();
+    return _database.contactDao.insertContacts(entities);
   }
 }

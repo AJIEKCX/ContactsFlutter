@@ -10,12 +10,12 @@ import 'package:rxdart/rxdart.dart';
 import 'bloc.dart';
 
 class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
-  final ContactsInteractor interactor;
-  final DataErrorHandler errorHandler;
+  final ContactsInteractor _interactor;
+  final DataErrorHandler _errorHandler;
 
-  ContactsBloc(this.interactor, this.errorHandler)
-      : assert(interactor != null),
-        assert(errorHandler != null);
+  ContactsBloc(this._interactor, this._errorHandler)
+      : assert(_interactor != null),
+        assert(_errorHandler != null);
 
   @override
   ContactsState get initialState => ContactsState.empty();
@@ -50,24 +50,24 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
   Stream<ContactsState> _mapFetchContactsToState() async* {
     yield ContactsState.loading();
     try {
-      final contacts = await interactor.fetchContacts(DataFetchStrategy.cache);
+      final contacts = await _interactor.fetchContacts(DataFetchStrategy.cache);
       yield ContactsState.success(contacts);
     } on Exception catch (e) {
       log(e.toString());
-      yield ContactsState.failure(errorHandler.handle(e));
+      yield ContactsState.failure(_errorHandler.handle(e));
     }
   }
 
   Stream<ContactsState> _mapRefreshContactsToState() async* {
     yield state.copyWith(isRefreshing: true);
     try {
-      final contacts = await interactor.fetchContacts(DataFetchStrategy.remote);
+      final contacts = await _interactor.fetchContacts(DataFetchStrategy.remote);
       yield ContactsState.success(contacts);
     } on Exception catch (e) {
       log(e.toString());
       yield state.copyWith(
         isFailure: true,
-        errorText: errorHandler.handle(e),
+        errorText: _errorHandler.handle(e),
         isRefreshing: false,
       );
     }
@@ -75,7 +75,7 @@ class ContactsBloc extends Bloc<ContactsEvent, ContactsState> {
 
   Stream<ContactsState> _mapSearchContactsToState(SearchContacts event) async* {
     try {
-      final contacts = await interactor.searchContacts(event.query);
+      final contacts = await _interactor.searchContacts(event.query);
       yield ContactsState.success(contacts);
     } on Exception catch (e) {
       log(e.toString());
