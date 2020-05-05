@@ -3,6 +3,12 @@
   "empty_contacts": "Нет контактов",
   "refresh_title": "Обновить",
   "search_title": "Поиск",
+
+  "temperament_sanguine": "Сангвиник",
+  "temperament_choleric": "Холерик",
+  "temperament_phlegmatic": "Флегматик",
+  "temperament_melancholic": "Меланхолик",
+
   "error_loading_data_title": "Ошибка при загрузке данных",
   "error_connection": "Проверьте ваше интернет соединение",
   "error_request_canceled": "Запрос был отменен",

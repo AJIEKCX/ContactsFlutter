@@ -33,6 +33,10 @@ class MessageLookup extends MessageLookupByLibrary {
     "error_response" : m0,
     "error_send_timeout" : MessageLookupByLibrary.simpleMessage("Отправлен таймаут при соединении с сервером"),
     "refresh_title" : MessageLookupByLibrary.simpleMessage("Обновить"),
-    "search_title" : MessageLookupByLibrary.simpleMessage("Поиск")
+    "search_title" : MessageLookupByLibrary.simpleMessage("Поиск"),
+    "temperament_choleric" : MessageLookupByLibrary.simpleMessage("Холерик"),
+    "temperament_melancholic" : MessageLookupByLibrary.simpleMessage("Меланхолик"),
+    "temperament_phlegmatic" : MessageLookupByLibrary.simpleMessage("Флегматик"),
+    "temperament_sanguine" : MessageLookupByLibrary.simpleMessage("Сангвиник")
   };
 }

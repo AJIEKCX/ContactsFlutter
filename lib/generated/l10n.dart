@@ -65,6 +65,42 @@ class S {
     );
   }
 
+  String get temperament_sanguine {
+    return Intl.message(
+      'Sanguine',
+      name: 'temperament_sanguine',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get temperament_choleric {
+    return Intl.message(
+      'Choleric',
+      name: 'temperament_choleric',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get temperament_phlegmatic {
+    return Intl.message(
+      'Phlegmatic',
+      name: 'temperament_phlegmatic',
+      desc: '',
+      args: [],
+    );
+  }
+
+  String get temperament_melancholic {
+    return Intl.message(
+      'Melancholic',
+      name: 'temperament_melancholic',
+      desc: '',
+      args: [],
+    );
+  }
+
   String get error_loading_data_title {
     return Intl.message(
       'Error loading data',

@@ -30,24 +30,6 @@ class ContactsState extends Equatable {
         contacts: const []);
   }
 
-  ContactsState copyWith({
-    bool isLoading,
-    bool isRefreshing,
-    bool isSuccess,
-    bool isFailure,
-    String errorText,
-    List<Contact> contacts,
-  }) {
-    return ContactsState(
-      isLoading: isLoading ?? this.isLoading,
-      isRefreshing: isRefreshing ?? this.isRefreshing,
-      isSuccess: isSuccess ?? this.isSuccess,
-      isFailure: isFailure ?? this.isFailure,
-      errorText: errorText ?? this.errorText,
-      contacts: contacts ?? this.contacts,
-    );
-  }
-
   factory ContactsState.loading() {
     return ContactsState(
         isLoading: true,
@@ -76,6 +58,24 @@ class ContactsState extends Equatable {
         isFailure: false,
         errorText: '',
         contacts: contacts);
+  }
+
+  ContactsState copyWith({
+    bool isLoading,
+    bool isRefreshing,
+    bool isSuccess,
+    bool isFailure,
+    String errorText,
+    List<Contact> contacts,
+  }) {
+    return ContactsState(
+      isLoading: isLoading ?? this.isLoading,
+      isRefreshing: isRefreshing ?? this.isRefreshing,
+      isSuccess: isSuccess ?? this.isSuccess,
+      isFailure: isFailure ?? this.isFailure,
+      errorText: errorText ?? this.errorText,
+      contacts: contacts ?? this.contacts,
+    );
   }
 
   @override

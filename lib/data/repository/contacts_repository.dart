@@ -79,6 +79,6 @@ class ContactsRepositoryImpl implements ContactsRepository {
     _syncRepository.setContactsSync(DateTime.now().millisecondsSinceEpoch);
     final entities =
         list.map<ContactEntity>((e) => _mapper.mapToEntity(e)).toList();
-    return _database.contactDao.insertContacts(entities);
+    return _database.contactDao.replaceContacts(entities);
   }
 }

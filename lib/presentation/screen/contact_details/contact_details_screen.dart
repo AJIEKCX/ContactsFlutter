@@ -1,4 +1,5 @@
 import 'package:contacts_flutter/domain/entity/contact.dart';
+import 'package:contacts_flutter/generated/l10n.dart';
 import 'package:contacts_flutter/presentation/extension/date_time_format.dart';
 import 'package:contacts_flutter/presentation/screen/contact_details/contact_details_arguments.dart';
 import 'package:contacts_flutter/presentation/theme/colors.dart';
@@ -34,7 +35,7 @@ class ContactDetailsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             Text(
-              _getTemperamentTitle(args.contact.temperament),
+              _getTemperamentTitle(context, args.contact.temperament),
               style: textTheme.subtitle1,
             ),
             const SizedBox(height: 8),
@@ -59,16 +60,16 @@ class ContactDetailsScreen extends StatelessWidget {
     }
   }
 
-  String _getTemperamentTitle(Temperament temperament) {
+  String _getTemperamentTitle(BuildContext context, Temperament temperament) {
     switch (temperament) {
       case Temperament.sanguine:
-        return 'Sanguine';
+        return S.of(context).temperament_sanguine;
       case Temperament.choleric:
-        return 'Choleric';
+        return S.of(context).temperament_choleric;
       case Temperament.phlegmatic:
-        return 'Phlegmatic';
+        return S.of(context).temperament_phlegmatic;
       case Temperament.melancholic:
-        return 'Melancholic';
+        return S.of(context).temperament_melancholic;
       default:
         return '';
     }

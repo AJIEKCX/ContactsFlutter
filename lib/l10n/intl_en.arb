@@ -3,6 +3,12 @@
   "empty_contacts": "Empty contacts",
   "refresh_title": "Refresh",
   "search_title": "Search",
+
+  "temperament_sanguine": "Sanguine",
+  "temperament_choleric": "Choleric",
+  "temperament_phlegmatic": "Phlegmatic",
+  "temperament_melancholic": "Melancholic",
+
   "error_loading_data_title": "Error loading data",
   "error_connection": "Check your internet connection",
   "error_request_canceled": "Request was cancelled",

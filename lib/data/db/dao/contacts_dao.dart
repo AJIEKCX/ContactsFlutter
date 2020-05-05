@@ -12,7 +12,7 @@ class ContactDao extends DatabaseAccessor<AppDatabase> with _$ContactDaoMixin {
 
   Future<List<ContactEntity>> getContacts() => select(contactEntities).get();
 
-  Future<void> insertContacts(List<ContactEntity> list) {
+  Future<void> replaceContacts(List<ContactEntity> list) {
     return transaction(() async {
       await delete(contactEntities).go();
       await batch((batch) => batch.insertAll(contactEntities, list));
