@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:contacts_flutter/domain/entity/contact.dart';
 import 'package:contacts_flutter/generated/l10n.dart';
 import 'package:contacts_flutter/presentation/extension/date_time_format.dart';
@@ -56,7 +58,7 @@ class ContactDetailsScreen extends StatelessWidget {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
-      throw 'Could not launch $url';
+      log('Could not launch $url');
     }
   }
 
