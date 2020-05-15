@@ -19,14 +19,16 @@ class ContactsInteractor {
   }
 
   bool _searchPredicate(Contact contact, String query) {
-    final bool firstPredicate = contact.name.startsWithIgnoreCase(query);
-    if (firstPredicate) {
+    if (contact.name.startsWithIgnoreCase(query)) {
       return true;
     }
-    final cleanPhoneNumber = _cleanPhoneNumber(contact.phone);
     final cleanQuery = _cleanPhoneNumber(query);
-
-    return cleanQuery.isNotEmpty && cleanPhoneNumber.startsWith(cleanQuery);
+    if (cleanQuery.isEmpty) {
+      return contact.phone.startsWith(query);
+    } else {
+      final cleanPhoneNumber = _cleanPhoneNumber(contact.phone);
+      return cleanPhoneNumber.contains(cleanQuery);
+    }
   }
 
   String _cleanPhoneNumber(String value) {
