@@ -12,7 +12,7 @@ class ContactDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ContactDetailsArguments args =
-        ModalRoute.of(context).settings.arguments;
+        ModalRoute.of(context).settings.arguments as ContactDetailsArguments;
     final textTheme = Theme.of(context).textTheme;
     return Scaffold(
       appBar: AppBar(),
